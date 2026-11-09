@@ -1,0 +1,19 @@
+Return-Path: <info@paypa1-secure.com>
+Authentication-Results: mx.example.org;
+       spf=pass smtp.mailfrom=paypa1-secure.com;
+       dkim=pass header.i=@paypa1-secure.com;
+       dmarc=pass header.from=paypa1-secure.com
+From: "PayPal Security" <service@paypa1-secure.com>
+To: student@example.org
+Subject: Your account has been limited
+Date: Mon, 02 Nov 2026 10:12:00 +0000
+Message-ID: <a1b2c3@paypa1-secure.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body>
+<p>Dear Customer,</p>
+<p>We noticed unusual activity. Your account will be suspended in 24 hours unless you confirm your details.</p>
+<p><a href="http://paypal.com.account-verify.xyz/login">https://www.paypal.com/myaccount</a></p>
+<p><a href="https://bit.ly/3xYzAbC">Resolve now</a></p>
+</body></html>
