@@ -1,0 +1,28 @@
+Return-Path: <bounces+12345@em1234.sendgrid.net>
+Authentication-Results: mx.example.org;
+       spf=pass (example.org: domain of bounces+12345@em1234.sendgrid.net designates 167.89.0.1 as permitted sender) smtp.mailfrom=bounces+12345@em1234.sendgrid.net;
+       dkim=pass header.i=@github.com header.s=s20150108;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=github.com
+From: GitHub <noreply@github.com>
+To: student@example.org
+Subject: Your weekly digest
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <digest-1@github.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b1"
+
+--b1
+Content-Type: text/plain; charset=utf-8
+
+Here's what happened in your repositories this week.
+View it at https://github.com/notifications
+
+--b1
+Content-Type: text/html; charset=utf-8
+
+<html><body>
+<p>Here's what happened in your repositories this week.</p>
+<p><a href="https://github.com/notifications">github.com/notifications</a></p>
+<p><a href="https://github.com/settings/emails">Unsubscribe</a></p>
+</body></html>
+--b1--

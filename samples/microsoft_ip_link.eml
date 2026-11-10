@@ -1,0 +1,15 @@
+Return-Path: <no-reply@m1crosoft-online.top>
+Received-SPF: fail (example.org: domain of m1crosoft-online.top does not designate 198.51.100.7 as permitted sender)
+From: "Microsoft 365 <security@microsoft.com>" <alert@m1crosoft-online.top>
+To: student@example.org
+Subject: Password expires today
+Date: Wed, 04 Nov 2026 07:30:00 +0000
+Message-ID: <k9@m1crosoft-online.top>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html><body>
+<p>Your Microsoft 365 password expires today. Keep your current password:</p>
+<p><a href="http://198.51.100.7/owa/login.php">Keep my password</a></p>
+<p><a href="https://login.microsoftonline.com@xn--micrsoft-qbh.com/">login.microsoftonline.com</a></p>
+</body></html>

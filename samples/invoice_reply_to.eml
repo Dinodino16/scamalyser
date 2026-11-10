@@ -1,0 +1,22 @@
+Return-Path: <accounts@northwind-supplies.co.uk>
+Authentication-Results: mx.example.org;
+       spf=softfail (example.org: transitioning domain of northwind-supplies.co.uk does not designate 203.0.113.9 as permitted sender) smtp.mailfrom=northwind-supplies.co.uk;
+       dkim=none;
+       dmarc=fail (p=QUARANTINE) header.from=northwind-supplies.co.uk
+From: "accounts@northwind-supplies.co.uk" <accounts@northwind-supplies.co.uk>
+Reply-To: northwind.accounts.dept@gmail.com
+To: finance@example.org
+Subject: URGENT: Updated bank details for invoice #44871
+Date: Tue, 03 Nov 2026 08:45:00 +0000
+Message-ID: <77xx@mailer.local>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hello,
+
+Please note our bank details have changed. Pay invoice #44871 to the new
+account in the attached letter today to avoid late fees. Reply to this
+email to confirm once payment is sent.
+
+Regards,
+Accounts Team
