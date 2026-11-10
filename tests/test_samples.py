@@ -43,3 +43,30 @@ def test_cli_json_and_exit_code(capsys):
 
 def test_cli_missing_file(capsys):
     assert main(["does-not-exist.eml"]) == 3
+
+
+class _FakeStream:
+    def __init__(self, tty: bool):
+        self._tty = tty
+
+    def isatty(self) -> bool:
+        return self._tty
+
+
+@pytest.mark.parametrize("argv, tty, expected", [
+    ([], True, True),                    # interactive terminal: show it
+    ([], False, False),                  # piped or redirected: hide it
+    (["--json"], True, False),           # JSON must stay machine-readable
+    (["--no-banner"], True, False),
+])
+def test_banner_only_for_interactive_text_output(argv, tty, expected):
+    from scamalyser.cli import build_parser, should_show_banner
+    args = build_parser().parse_args(["x.eml", *argv])
+    assert should_show_banner(args, _FakeStream(tty)) is expected
+
+
+def test_cli_output_has_no_banner_when_captured(capsys):
+    from conftest import SAMPLES
+    from scamalyser.banner import BANNER
+    main([str(SAMPLES / "legit_newsletter.eml")])
+    assert BANNER not in capsys.readouterr().out

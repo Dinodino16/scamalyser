@@ -41,6 +41,7 @@ scamalyser path/to/email.eml       # human-readable report
 scamalyser email.eml --json        # JSON, for scripts and the upcoming web UI
 scamalyser email.eml --online      # also re-verify DKIM and look up DMARC in DNS
 scamalyser email.eml -q            # hide informational (0-point) findings
+scamalyser email.eml --no-banner   # skip the start-up banner (it never shows with --json or when piped)
 pytest                             # run the test suite
 ```
 
