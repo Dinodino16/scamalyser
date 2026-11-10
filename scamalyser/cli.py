@@ -3,6 +3,10 @@
     scamalyser suspicious.eml            # human-readable report
     scamalyser suspicious.eml --json     # machine-readable, for scripts/the web UI
     scamalyser suspicious.eml --online   # also verify DKIM and look up DMARC in DNS
+    scamalyser suspicious.eml --no-banner  # skip the start-up banner
+
+The banner is only printed to an interactive terminal, never with --json or
+when output is piped or redirected.
 
 Exit code is 0 for LOW, 1 for SUSPICIOUS, 2 for LIKELY PHISHING, so the tool
 can be used in scripts (e.g. a mail filter) without parsing output.
@@ -18,6 +22,7 @@ import textwrap
 
 from . import __version__
 from .analyser import Report, Verdict, analyse
+from .banner import BANNER
 from .findings import Severity
 from .parser import parse_file
 
@@ -58,6 +63,12 @@ def format_report(report: Report, colour: bool = False, show_info: bool = True) 
     return "\n".join(lines)
 
 
+def should_show_banner(args: argparse.Namespace, stream) -> bool:
+    """Only greet humans: skip the banner for JSON, pipes/redirects and --no-banner,
+    so scripts that read Scamalyser's output never have to strip it."""
+    return not (args.no_banner or args.json) and stream.isatty()
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="scamalyser",
@@ -67,6 +78,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--json", action="store_true", help="output the report as JSON")
     p.add_argument("--online", action="store_true",
                    help="verify DKIM and look up the sender's DMARC policy via DNS")
+    p.add_argument("--no-banner", action="store_true", help="don't print the start-up banner")
     p.add_argument("--quiet", "-q", action="store_true",
                    help="hide informational findings that carry no points")
     p.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
@@ -75,6 +87,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if should_show_banner(args, sys.stdout):
+        colour = _use_colour(sys.stdout)
+        print(f"\033[1;36m{BANNER}{_RESET}" if colour else BANNER)
     try:
         email = parse_file(args.eml)
     except OSError as exc:
